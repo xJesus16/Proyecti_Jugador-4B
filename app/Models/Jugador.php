@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Jugador extends Model
+{
+    protected $table = 'jugador';
+    // protected $primaryKey = 'idalumno';
+    public $timestamps=false;
+}
