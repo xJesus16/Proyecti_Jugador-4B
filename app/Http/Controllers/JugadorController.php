@@ -166,7 +166,7 @@ function autoregistro(Request $r)
     $jugador->nombre = $context['nombre'];
     $jugador->edad = $context['edad'];
     $jugador->puntos = 0;
-    $jugador->tipo = $context['tipo'];
+        
     $jugador->foto = '';
     $jugador->idusuario = $usuario->id;
 

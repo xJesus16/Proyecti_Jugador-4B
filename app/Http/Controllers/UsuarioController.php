@@ -37,44 +37,44 @@ class UsuarioController extends Controller
         return view('usuario.formulario')->with($datos);
     }
 
-    function save(Request $request)
-    {
+        function save(Request $request)
+        {
 
-    $context = $request->all();
+        $context = $request->all();
 
-    switch($context['operacion']){
-        case 'Agregar':
-         $usuario = new Usuarios();
-        // Izquierda es BD <> Derecha es formulario
-        $usuario->email = $context['email'];
-        if($context['password']!=''){
-         $usuario->password = bcrypt ($context['password']);
+        switch($context['operacion']){
+            case 'Agregar':
+            $usuario = new Usuarios();
+            // Izquierda es BD <> Derecha es formulario
+            $usuario->email = $context['email'];
+            if($context['password']!=''){
+            $usuario->password = bcrypt ($context['password']);
+            }
+            $usuario->idrol = $context['idrol'];
+            $usuario->save();
+            break;
+
+            case 'Modificar':
+            $usuario = Usuarios::find($context['id']);
+            $usuario->email = $context['email'];
+            if($context['password']!=''){
+            $usuario->password = bcrypt ($context['password']);
+            }
+            $usuario->idrol = $context['idrol'];
+            $usuario->save();
+            break;
+
+            case 'Eliminar':
+            $usuario=Usuarios::find($request->input('id'));
+            $usuario->delete();
+            break;
+            
+
         }
-        $usuario->idrol = $context['idrol'];
-        $usuario->save();
-        break;
 
-        case 'Modificar':
-        $usuario = Usuarios::find($context['id']);
-         $usuario->email = $context['email'];
-         if($context['password']!=''){
-        $usuario->password = bcrypt ($context['password']);
-         }
-         $usuario->idrol = $context['idrol'];
-         $usuario->save();
-        break;
+        return redirect()->route('lista_usuario');
 
-        case 'Eliminar':
-        $usuario=Usuarios::find($request->input('id'));
-        $usuario->delete();
-        break;
-        
-
-    }
-
-    return redirect()->route('lista_usuario');
-
-    }
+        }
 
 
 
